@@ -1,0 +1,16 @@
+{
+  "name": "doc-editor",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "start": "yarn workspace backend start",
+    "build": "yarn workspace frontend build && yarn workspace backend build",
+    "dev": "concurrently \"yarn workspace backend dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

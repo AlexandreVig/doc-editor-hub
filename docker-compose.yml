@@ -22,7 +22,7 @@ services:
       ME_CONFIG_BASICAUTH: false
   doc-editor:
     container_name: doc-editor
-    build: .
+    image: alexandrevig/doc-editor-hub
     restart: unless-stopped
     environment:
       MONGODB_URL: mongodb://mongo:27017/doc-editor

@@ -29,8 +29,10 @@ const docTitle = ref("");
 
 const isExporting = ref(false);
 
+const websocketUrl = process.env.NODE_ENV === 'development' ? 'ws://localhost:1234' : `${location.protocol === "https:" ? "wss" : "ws" }://${location.host}/ws`
+
 const provider = new HocuspocusProvider({
-  url: "ws://localhost:1234",
+  url: websocketUrl,
   document: doc,
   name: String(route.params.id),
 });

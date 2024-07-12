@@ -33,3 +33,4 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/doc-editor-hub:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/doc-editor-hub:1.0.0

@@ -5,12 +5,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxt/ui", "@pinia/nuxt", "nuxt-tiptap-editor"],
 
-  runtimeConfig: {
-    public: {
-      mongoUrl: process.env.MONGODB_URL
-    },
-  },
-
   postcss: {
     plugins: {
       tailwindcss: {},

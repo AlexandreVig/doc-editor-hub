@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build-and-push:
+  build-push-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -40,3 +40,12 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/doc-editor-hub:${{ steps.package-version.outputs.current-version}}
             ${{ secrets.DOCKERHUB_USERNAME }}/doc-editor-hub:latest
+      - name: Deploy to Jelastic Cloud
+        run: |
+          ./deploy_to_jelastic.sh \
+            --hoster-api-host ${{ secrets.JELASTIC_HOST }} \
+            --env-name ${{ secrets.JELASTIC_ENV_NAME }} \
+            --session ${{ secrets.JELASTIC_SESSION }} \
+            --tag ${{ steps.package-version.outputs.current-version }} \
+            --node-id ${{ secrets.JELASTIC_NODE_ID }} \
+            --use-existing-volumes true

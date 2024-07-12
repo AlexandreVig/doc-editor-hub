@@ -1,4 +1,4 @@
-FROM node:20-slim as base
+FROM node:20-alpine as base
 
 ARG PORT=3000
 

@@ -38,5 +38,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/doc-editor-hub:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/doc-editor-hub:${{ steps.package-version.outputs.current-version}}
+            ${{ secrets.DOCKERHUB_USERNAME }}/doc-editor-hub:latest

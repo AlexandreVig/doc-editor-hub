@@ -9,6 +9,7 @@ export default defineNitroPlugin(async (nitroapp) => {
         user: process.env.MONGODB_USER,
         pass: process.env.MONGODB_PASSWD,
       };
+      console.log("HERE");
       await mongoose.connect(mongoDb, authParams);
     } else {
       await mongoose.connect(mongoDb);

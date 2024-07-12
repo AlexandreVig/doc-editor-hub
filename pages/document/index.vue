@@ -25,9 +25,7 @@ const createFile = () => {
   settings
     .post("/api/documents", {
       title: "New document",
-      content: {
-        segments: [],
-      },
+      content: "<p></p>",
     })
     .then(() => {
       toast.add({
@@ -83,6 +81,7 @@ const createFile = () => {
         <DocCard
           v-for="doc in ownedDocs"
           :document="doc"
+          :showOwner="false"
           @update="updateDocList"
         />
         <UButton
@@ -116,10 +115,10 @@ const createFile = () => {
       <UDivider class="my-8" />
       <h1 class="text-2xl mb-4">Shared documents</h1>
       <div v-if="sharedDocs.length > 0" class="grid grid-cols-6 gap-6 my-6">
-        <DocCard v-for="doc in sharedDocs" :document="doc" />
+        <DocCard v-for="doc in sharedDocs" :document="doc" :showOwner="true" />
       </div>
       <div v-else class="my-6">
-        <EmptyCard> You don't have shared document </EmptyCard>
+        <EmptyCard>Nobody shared you documents</EmptyCard>
       </div>
     </div>
   </UCard>

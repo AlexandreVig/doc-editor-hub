@@ -1,26 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-import createWebSocketServer from "./socket/server";
-
 export default defineNuxtConfig({
   ssr: false,
-  modules: ["@pinia/nuxt", "@nuxt/ui"],
-
   devtools: { enabled: true },
+  modules: ["@nuxt/ui", "@pinia/nuxt", "nuxt-tiptap-editor"],
 
   runtimeConfig: {
-    mongoUrl: process.env.MONGO_URL || "mongodb://localhost:27017/doc-editor",
     public: {
-      strapiUrl: process.env.STRAPI_URL,
+      mongoUrl: process.env.MONGODB_URL
     },
-  },
-
-  devServer: {
-    port: 5000,
-  },
-
-  routeRules: {
-    '/socket/**': { proxy: 'http://localhost:3000/**' },
   },
 
   postcss: {
@@ -30,12 +18,13 @@ export default defineNuxtConfig({
     },
   },
 
-  hooks: {
-    // Hook into the server start to start Socket.IO server
-    listen() {
-      createWebSocketServer(3000);
-    },
+  ui: {
+    icons: ['heroicons', 'fa6-solid']
   },
 
-  compatibilityDate: "2024-07-03",
-});
+  tiptap: {
+    prefix: "Tiptap", //prefix for Tiptap imports, composables not included
+  },
+
+  compatibilityDate: "2024-07-11",
+})

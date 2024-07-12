@@ -26,15 +26,14 @@ const settings = useSettings();
 
 async function onSubmit (event: FormSubmitEvent<Schema>) {
   if (event.data.password !== event.data.passwordConfirmation) {
-    onFailure("Les mots de passe ne correspondent pas !");
+    onFailure("The passwords don't match");
     return;
   }
-  settings.post("/auth/change-password", event.data).then((response) => {
-    localStorage.setItem('user', response.data.jwt);
-    onSuccess("Votre mot de passe a été mis à jour !");
+  settings.post("/api/auth/update-password", event.data).then((response) => {
+    localStorage.setItem('user', response.data.token);
+    onSuccess("Your password has been updated");
   }).catch((error) => {
-    console.error(error);
-    onFailure("Une erreur s'est produite !");
+    onFailure(`An error occurred: ${error.response.statusText}`);
   })
 }
 

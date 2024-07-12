@@ -6,6 +6,7 @@ const secret = process.env.JWT_SECRET || "your_jwt_secret";
 
 const protected_routes = [
   "/api/auth/me",
+  "/api/auth/update-password",
   "/api/documents"
 ]
 

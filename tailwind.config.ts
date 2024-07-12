@@ -24,5 +24,8 @@ export default <Partial<Config>>{
         '3xl': '0 0 16px -8px #B53929',
       }
     }
-  }
+  },
+  plugins: [
+    require('@tailwindcss/typography')
+  ]
 }

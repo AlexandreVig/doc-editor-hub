@@ -3,7 +3,7 @@ import type { docCard } from '~/types/cardTypes';
 import { sha256 } from "js-sha256";
 import deleteConfirmationModal from './modal/deleteConfirmationModal.vue';
 
-const props = defineProps<{ document: docCard }>();
+const props = defineProps<{ document: docCard, showOwner: boolean }>();
 const emit = defineEmits(["update"]);
 
 const modal = useModal();
@@ -44,10 +44,6 @@ const deleteFile = () => {
     },
   });
 }
-
-onMounted(() => {
-  console.log(props.document);
-})
 </script>
 
 <template>
@@ -59,6 +55,17 @@ onMounted(() => {
     <div class="flex flex-col">
       <span>Last modified:</span>
       <span>{{ document.timestamps.updatedAt }}</span>
+    </div>
+    <div v-if="document.collaborators.length > 0"  class="flex justify-between mt-2">
+      <span>Shared by:</span>
+      <UAvatarGroup size="xs" :max="4">
+        <UTooltip class="rounded-full" :text="document.ownerId.name">
+          <UAvatar
+            :src="`https://www.gravatar.com/avatar/${getHash(document.ownerId.email)}?d=retro`"
+            :alt="document.ownerId.name"
+          />
+        </UTooltip>
+      </UAvatarGroup>
     </div>
     <div v-if="document.collaborators.length > 0"  class="flex justify-between mt-2">
       <span>Shared with:</span>

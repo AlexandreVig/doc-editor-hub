@@ -1,75 +1,55 @@
-# Nuxt UI Minimal Starter
+# Doc Editor
 
-Look at [Nuxt docs](https://nuxt.com/docs/getting-started/introduction) and [Nuxt UI docs](https://ui.nuxt.com) to learn more.
+Doc Editor is a collaborative text editor similar to Google Docs or Framapad. It allows multiple users to work on a document simultaneously with real-time updates.
+
+## Features
+
+- Real-time collaborative editing
+- User authentication
+- Document sharing and permissions
+- Text formatting
+- Document versioning
+
+## Technology Stack
+
+- **Frontend:** VueJS
+- **Backend:** NodeJS, Nuxt 3
+- **WebSockets:** WS with the help of Hocuspocus server
+- **Database:** MongoDB
+- **Deployment:** Jelastic Cloud via CI/CD
+
+# Installation
 
 ## Setup
+
 
 Make sure to install the dependencies:
 
 ```bash
 # npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
 ## Development Server
 
-Start the development server on `http://localhost:3000`:
+Start the development server on `http://localhost:3000`.
+You need to start a mongodb database, a `docker-compose.yml` file is given:
 
 ```bash
-# npm
+# start the database
+docker compose up
+
+# run the dev server
 npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
 ## Production
 
-Build the application for production:
+A `Dockerfile` is provide
 
-```bash
-# npm
-npm run build
+Some env variable are needed:
 
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- `MONGODB_URL`: The connection string for MongoDB.
+- `JWT_SECRET`: Secret key for JSON Web Token (JWT) authentication.
+- `PORT`: On which port the http server while run
+- `WSPORT`: On which port the websocket server while run

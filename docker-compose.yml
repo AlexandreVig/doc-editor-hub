@@ -20,17 +20,6 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://mongo:27017/
       ME_CONFIG_BASICAUTH: false
-  doc-editor:
-    container_name: doc-editor
-    image: alexandrevig/doc-editor-hub
-    restart: unless-stopped
-    environment:
-      MONGODB_URL: mongodb://mongo:27017/doc-editor
-    ports:
-      - "3000:3000"
-      - "1234:1234"
-    depends_on:
-      - mongo
 
 
 volumes:

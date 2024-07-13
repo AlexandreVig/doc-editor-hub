@@ -3,7 +3,7 @@ import type { docCard } from '~/types/cardTypes';
 import { sha256 } from "js-sha256";
 import deleteConfirmationModal from './modal/deleteConfirmationModal.vue';
 
-const props = defineProps<{ document: docCard, showOwner: boolean }>();
+const props = defineProps<{ document: docCard, isShared: boolean }>();
 const emit = defineEmits(["update"]);
 
 const modal = useModal();
@@ -56,7 +56,7 @@ const deleteFile = () => {
       <span>Last modified:</span>
       <span>{{ document.timestamps.updatedAt }}</span>
     </div>
-    <div v-if="document.collaborators.length > 0"  class="flex justify-between mt-2">
+    <div v-if="isShared && document.collaborators.length > 0"  class="flex justify-between mt-2">
       <span>Shared by:</span>
       <UAvatarGroup size="xs" :max="4">
         <UTooltip class="rounded-full" :text="document.ownerId.name">
@@ -89,6 +89,7 @@ const deleteFile = () => {
         :trailing="false"
       />
       <UButton
+        v-if="!isShared"
         @click="deleteFile"
         icon="i-heroicons-trash"
         size="sm"

@@ -6,7 +6,7 @@ Doc Editor is a collaborative text editor similar to Google Docs or Framapad. It
 
 - Real-time collaborative editing
 - User authentication
-- Document sharing and permissions
+- Document sharing
 - Text formatting
 - Document versioning
 
@@ -21,7 +21,6 @@ Doc Editor is a collaborative text editor similar to Google Docs or Framapad. It
 # Installation
 
 ## Setup
-
 
 Make sure to install the dependencies:
 
@@ -51,5 +50,5 @@ Some env variable are needed:
 
 - `MONGODB_URL`: The connection string for MongoDB.
 - `JWT_SECRET`: Secret key for JSON Web Token (JWT) authentication.
-- `PORT`: On which port the http server while run
-- `WSPORT`: On which port the websocket server while run
+- `PORT`: On which port the http server while run.
+- `WSPORT`: On which port the websocket server while run.

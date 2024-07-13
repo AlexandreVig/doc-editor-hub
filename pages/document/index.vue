@@ -81,7 +81,7 @@ const createFile = () => {
         <DocCard
           v-for="doc in ownedDocs"
           :document="doc"
-          :showOwner="false"
+          :isShared="false"
           @update="updateDocList"
         />
         <UButton
@@ -115,7 +115,7 @@ const createFile = () => {
       <UDivider class="my-8" />
       <h1 class="text-2xl mb-4">Shared documents</h1>
       <div v-if="sharedDocs.length > 0" class="grid grid-cols-6 gap-6 my-6">
-        <DocCard v-for="doc in sharedDocs" :document="doc" :showOwner="true" />
+        <DocCard v-for="doc in sharedDocs" :document="doc" :isShared="true" />
       </div>
       <div v-else class="my-6">
         <EmptyCard>Nobody shared you documents</EmptyCard>

@@ -5,7 +5,12 @@ import template from './template.html' assert {type: 'html'}
 import { Readable } from 'stream'
 
 async function generatePDFfromHTML(htmlContent:string) {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox'
+    ]
+  });
   const page = await browser.newPage();
   await page.setContent(htmlContent);
   const res = await page.pdf({ format: 'A4' });

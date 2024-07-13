@@ -5,8 +5,16 @@ ARG PORT=3000
 
 ENV NODE_ENV production
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+ENV PUPPETEER_EXECUTABLE_PATH /usr/bin/chromium-browser
 
 WORKDIR /src
+
+RUN apk update && apk add --no-cache --virtual \
+    .build-deps \
+    udev \
+    ttf-opensans \
+    chromium \
+    ca-certificates
 
 # Build stage
 FROM base AS build
@@ -20,25 +28,10 @@ COPY --link . .
 RUN npm run build
 RUN npm prune
 
-# Puppeteer dependencies
-FROM base AS puppeteer
-
-RUN apk add --no-cache \
-    chromium \
-    nss \
-    freetype \
-    harfbuzz \
-    ca-certificates \
-    ttf-freefont
-
 # Final stage
 FROM base
 
 ENV PORT $PORT
-
-# Copy puppeteer dependencies
-COPY --from=puppeteer /usr/bin/chromium-browser /usr/bin/chromium-browser
-COPY --from=puppeteer /usr/lib/chromium /usr/lib/chromium
 
 # Copy built files and node modules
 COPY --from=build /src/.output /src/.output

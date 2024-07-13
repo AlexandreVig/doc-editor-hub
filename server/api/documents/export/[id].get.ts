@@ -34,10 +34,6 @@ export default defineEventHandler(async (event) => {
     setHeader(event, 'Content-Disposition', `attachment; filename="${document.title}.pdf"`);
     return sendStream(event, Readable.from(await generatePDFfromHTML(html)))
   } catch (error) {
-    console.log(error);
-    if (error instanceof H3Error) {
-      throw error;
-    }
     throw createError({
       statusCode: 500,
       statusMessage: "Error fetching document",
